@@ -10,13 +10,13 @@ import Home from '.'
 
 const props = {
   banners: bannerMock,
-  newGames: gamesMock,
+  newGames: [gamesMock[0]],
   mostPopularHighlight: highlightMock,
-  mostPopularGames: gamesMock,
-  upcommingGames: gamesMock,
+  mostPopularGames: [gamesMock[0]],
+  upcommingGames: [gamesMock[0]],
   upcommingHighligth: highlightMock,
-  upcommingMoreGames: gamesMock,
-  freeGames: gamesMock,
+  upcommingMoreGames: [gamesMock[0]],
+  freeGames: [gamesMock[0]],
   freeHighligth: highlightMock
 }
 
@@ -24,28 +24,42 @@ describe('<Home />', () => {
   it('should render menu and footer', () => {
     renderWithTheme(<Home {...props} />)
 
+    // menu
     expect(screen.getByLabelText(/open menu/i)).toBeInTheDocument()
 
+    // footter
     expect(
       screen.getByRole('heading', { name: /contact us/i })
     ).toBeInTheDocument()
-  })
 
-  it('should render the sections', () => {
-    renderWithTheme(<Home {...props} />)
+    // logos (menu/footer)
+    expect(screen.getAllByRole('img', { name: /won games/i })).toHaveLength(2)
 
+    // Section
     expect(screen.getByRole('heading', { name: /News/i })).toBeInTheDocument()
 
+    // Section
     expect(
-      screen.getByRole('heading', { name: /Most Populars/i })
+      screen.getByRole('heading', { name: /Most Popular/i })
     ).toBeInTheDocument()
 
+    // Section
     expect(
       screen.getByRole('heading', { name: /Upcoming/i })
     ).toBeInTheDocument()
 
+    // Section
     expect(
       screen.getByRole('heading', { name: /Free Games/i })
     ).toBeInTheDocument()
+
+    // banner
+    expect(screen.getAllByText(/defy death 1/i)).toHaveLength(1)
+
+    // card game ( 5 sections com 4 cards cada = 5x4 = 20)
+    expect(screen.getAllByText(/population zero/i)).toHaveLength(5)
+
+    // highlight
+    expect(screen.getAllByText(/read dead is back!/i)).toHaveLength(3)
   })
 })
