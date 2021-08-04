@@ -4,6 +4,15 @@ import { renderWithTheme } from 'utils/tests/helpers'
 import Logo from '.'
 
 describe('<Logo />', () => {
+  it('should render the logo with id passed', () => {
+    // renderizar o componente `render`
+    // selecionar o elemento a ser testado `screen` (queries) - getByLabel ...
+    // expect - assertion - asserção = comparação - análise (espero que renderize a logo branca)
+
+    const { container } = renderWithTheme(<Logo id="myId" />)
+    expect(container.querySelector('#paint_linear_myId')).toBeInTheDocument()
+  })
+
   it('should render a white label by default', () => {
     // renderizar o componente `render`
     // selecionar o elemento a ser testado `screen` (queries) - getByLabel ...
