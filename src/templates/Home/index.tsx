@@ -1,5 +1,3 @@
-//import * as S from './styles'
-
 import { BannerProps } from 'components/Banner'
 import BannerSlider from 'components/BannerSlider'
 import { GameCardProps } from 'components/GameCard'
