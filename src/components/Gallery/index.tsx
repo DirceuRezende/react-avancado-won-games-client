@@ -25,11 +25,6 @@ const commonSettings: SliderSettings = {
   prevArrow: <ArrowLeft aria-label="previous image" />
 }
 
-const modalSettings: SliderSettings = {
-  ...commonSettings,
-  slidesToShow: 1
-}
-
 const settings: SliderSettings = {
   ...commonSettings,
   slidesToShow: 4,
@@ -61,6 +56,11 @@ const settings: SliderSettings = {
   ]
 }
 
+const modalSettings: SliderSettings = {
+  ...commonSettings,
+  slidesToShow: 1
+}
+
 const Gallery = ({ items }: GalleryProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const slider = useRef<SlickSlider>(null)
@@ -80,7 +80,7 @@ const Gallery = ({ items }: GalleryProps) => {
         {items.map((item, index) => (
           <img
             role="button"
-            key={item.src}
+            key={`thumb-${item.src}`}
             src={item.src}
             alt={`Thumb - ${item.label}`}
             onClick={() => {
