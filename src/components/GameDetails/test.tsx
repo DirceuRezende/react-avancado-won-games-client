@@ -8,7 +8,8 @@ const props: GameDetailsProps = {
   platforms: ['windows', 'mac', 'linux'],
   releaseDate: '2020-11-21T23:00:00',
   rating: 'BR0',
-  genres: ['Role-playing', 'Narrative']
+  genres: ['Role-playing', 'Narrative'],
+  publisher: 'Walktrough'
 }
 describe('<GameDetails />', () => {
   it('should render the blocks', () => {
@@ -64,5 +65,17 @@ describe('<GameDetails />', () => {
     renderWithTheme(<GameDetails {...props} />)
 
     expect(screen.getByText('Role-playing / Narrative')).toBeInTheDocument()
+  })
+
+  it('should render the developer', () => {
+    renderWithTheme(<GameDetails {...props} />)
+
+    expect(screen.getByText(/Different Tales/i)).toBeInTheDocument()
+  })
+
+  it('should render the publisher', () => {
+    renderWithTheme(<GameDetails {...props} />)
+
+    expect(screen.getByText(/walktrough/i)).toBeInTheDocument()
   })
 })
