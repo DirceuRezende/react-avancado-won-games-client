@@ -66,6 +66,18 @@ describe('<Button />', () => {
     )
   })
 
+  it('should render a disabled Button', () => {
+    renderWithTheme(<Button disabled>Buy now</Button>)
+
+    expect(screen.getByRole('button', { name: /buy now/i })).toHaveStyleRule(
+      'cursor',
+      'not-allowed',
+      {
+        modifier: ':disabled'
+      }
+    )
+  })
+
   it('should render a minimal version', () => {
     renderWithTheme(
       <Button icon={<AddShoppingCart data-testid="icon" />} minimal>
