@@ -1,7 +1,6 @@
+import { render, screen, waitFor } from 'utils/test-utils'
 import userEvent from '@testing-library/user-event'
 import { Email } from '@styled-icons/material-outlined'
-
-import { render, screen, waitFor } from 'utils/test-utils'
 
 import TextField from '.'
 
@@ -39,8 +38,14 @@ describe('<TextField />', () => {
   })
 
   it('Changes its value when typing', async () => {
-    const onInput = jest.fn()
-    render(<TextField onInput={onInput} label="TextField" name="TextField" />)
+    const onInputChange = jest.fn()
+    render(
+      <TextField
+        onInputChange={onInputChange}
+        label="TextField"
+        name="TextField"
+      />
+    )
 
     const input = screen.getByRole('textbox')
     const text = 'This is my new text'
@@ -48,16 +53,16 @@ describe('<TextField />', () => {
 
     await waitFor(() => {
       expect(input).toHaveValue(text)
-      expect(onInput).toHaveBeenCalledTimes(text.length)
+      expect(onInputChange).toHaveBeenCalledTimes(text.length)
     })
-    expect(onInput).toHaveBeenCalledWith(text)
+    expect(onInputChange).toHaveBeenCalledWith(text)
   })
 
   it('Does not changes its value when disabled', async () => {
-    const onInput = jest.fn()
+    const onInputChange = jest.fn()
     render(
       <TextField
-        onInput={onInput}
+        onInputChange={onInputChange}
         label="TextField"
         name="TextField"
         disabled
@@ -73,7 +78,7 @@ describe('<TextField />', () => {
     await waitFor(() => {
       expect(input).not.toHaveValue(text)
     })
-    expect(onInput).not.toHaveBeenCalled()
+    expect(onInputChange).not.toHaveBeenCalled()
   })
 
   it('Renders with error', () => {
@@ -81,22 +86,6 @@ describe('<TextField />', () => {
       <TextField
         icon={<Email data-testid="icon" />}
         label="TextField"
-        name="TextField"
-        error="Error message"
-      />
-    )
-
-    expect(screen.getByText('Error message')).toBeInTheDocument()
-
-    expect(container.firstChild).toMatchSnapshot()
-  })
-
-  it('Renders with error', () => {
-    const { container } = render(
-      <TextField
-        icon={<Email data-testid="icon" />}
-        label="TextField"
-        name="TextField"
         error="Error message"
       />
     )
