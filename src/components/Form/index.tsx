@@ -4,6 +4,13 @@ import { darken } from 'polished'
 import * as TextFieldStyles from 'components/TextField/styles'
 import * as ButtonStyles from 'components/Button/styles'
 
+export const FormLoading = styled.img.attrs(() => ({
+  src: '/img/dots.svg',
+  alt: 'Waiting...'
+}))`
+  width: 4rem;
+`
+
 export const FormWrapper = styled.div`
   ${({ theme }) => css`
     ${TextFieldStyles.Wrapper} {
