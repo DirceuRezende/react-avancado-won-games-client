@@ -1,4 +1,5 @@
-global.fetch = require('node-fetch')
+import 'cross-fetch/polyfill'
+
 import { server } from '../src/utils/mockServer/server'
 
 beforeAll(() => {
