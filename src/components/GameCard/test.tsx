@@ -1,4 +1,6 @@
-import { render, screen, fireEvent } from 'utils/test-utils'
+import 'session.mock'
+import { render, screen } from 'utils/test-utils'
+import theme from 'styles/theme'
 
 import GameCard from '.'
 
@@ -39,45 +41,24 @@ describe('<GameCard />', () => {
   })
 
   it('should render price in label', () => {
-    // renderiza o componente
     render(<GameCard {...props} />)
-    // preço não tenha line-through
-    expect(screen.getByText('$235.00')).not.toHaveStyle({
-      'text-decoration': 'line-through'
-    })
-    // preço tenha o background secundário
-    expect(screen.getByText('$235.00')).toHaveStyle({
-      'background-color': '#3CD3C1'
-    })
+
+    const price = screen.getByText('$235.00')
+
+    expect(price).not.toHaveStyle({ textDecoration: 'line-through' })
+    expect(price).toHaveStyle({ backgroundColor: theme.colors.secondary })
   })
 
   it('should render a line-through in price when promotional', () => {
-    // renderiza o componente (COM promotionalPrice) // 200 reais // 15 reais
-    const promotionalPrice = 15
-    render(<GameCard {...props} promotionalPrice={promotionalPrice} />)
-    // preço tenha line-through (200)
+    render(<GameCard {...props} promotionalPrice={15} />)
+
     expect(screen.getByText('$235.00')).toHaveStyle({
-      'text-decoration': 'line-through'
+      textDecoration: 'line-through'
     })
-    // preço novo promocional não vai ter line-through (15)
+
     expect(screen.getByText('$15.00')).not.toHaveStyle({
-      'text-decoration': 'line-through'
+      textDecoration: 'line-through'
     })
-  })
-
-  it('should render a filled Favorite icon when favorite is true', () => {
-    render(<GameCard {...props} favorite />)
-
-    expect(screen.getByLabelText(/remove from wishlist/i)).toBeInTheDocument()
-  })
-
-  it('should call onFav method when favorite is clicked', () => {
-    const onFav = jest.fn()
-    render(<GameCard {...props} favorite onFav={onFav} />)
-
-    fireEvent.click(screen.getAllByRole('button')[0])
-
-    expect(onFav).toBeCalled()
   })
 
   it('should render Ribbon', () => {

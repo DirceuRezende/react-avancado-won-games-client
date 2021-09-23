@@ -92,7 +92,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
       })
     }
 
-    // // senão atualiza a wishlist existente
+    // senão atualiza a wishlist existente
     return updateList({
       variables: {
         input: {
@@ -104,7 +104,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
   }
 
   const removeFromWishlist = (id: string) => {
-    updateList({
+    return updateList({
       variables: {
         input: {
           where: { id: wishlistId },
