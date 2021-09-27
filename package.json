@@ -28,6 +28,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.9",
+    "@stripe/react-stripe-js": "^1.5.0",
+    "@stripe/stripe-js": "^1.18.0",
     "@styled-icons/fa-brands": "^10.34.0",
     "cross-fetch": "^3.1.4",
     "dotenv": "^10.0.0",

@@ -91,6 +91,11 @@ exports[`<CartList /> should render the cart list 1`] = `
   align-self: start;
 }
 
+.c1 {
+  max-height: 40rem;
+  overflow-y: auto;
+}
+
 .c9 {
   background: #eee;
   color: #030517;
@@ -113,11 +118,6 @@ exports[`<CartList /> should render the cart list 1`] = `
 
 .c10 {
   color: #F231A5;
-}
-
-.c1 {
-  max-height: 40rem;
-  overflow-y: auto;
 }
 
 @media (min-width:768px) {
