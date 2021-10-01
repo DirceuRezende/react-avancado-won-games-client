@@ -59,6 +59,12 @@ type Query {
   """"""
   home: Home
   """"""
+  order(id: ID!): Order
+  """"""
+  orders(sort: String, limit: Int, start: Int, where: JSON): [Order!]!
+  """"""
+  ordersConnection(sort: String, limit: Int, start: Int, where: JSON): OrderConnection
+  """"""
   platform(id: ID!): Platform
   """"""
   platforms(sort: String, limit: Int, start: Int, where: JSON): [Platform!]!
@@ -181,7 +187,7 @@ type AdminUser {
 }
 
 """"""
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Banner | BannerConnection | BannerAggregator | BannerGroupBy | BannerConnectionId | BannerConnectionCreated_at | BannerConnectionUpdated_at | BannerConnectionImage | BannerConnectionTitle | BannerConnectionSubtitle | BannerConnectionButton | BannerConnectionRibbon | BannerConnectionCreated_by | BannerConnectionUpdated_by | createBannerPayload | updateBannerPayload | deleteBannerPayload | Category | CategoryConnection | CategoryAggregator | CategoryGroupBy | CategoryConnectionId | CategoryConnectionCreated_at | CategoryConnectionUpdated_at | CategoryConnectionName | CategoryConnectionSlug | CategoryConnectionCreated_by | CategoryConnectionUpdated_by | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | Developer | DeveloperConnection | DeveloperAggregator | DeveloperGroupBy | DeveloperConnectionId | DeveloperConnectionCreated_at | DeveloperConnectionUpdated_at | DeveloperConnectionName | DeveloperConnectionSlug | DeveloperConnectionCreated_by | DeveloperConnectionUpdated_by | createDeveloperPayload | updateDeveloperPayload | deleteDeveloperPayload | Game | GameConnection | GameAggregator | GameAggregatorSum | GameAggregatorAvg | GameAggregatorMin | GameAggregatorMax | GameGroupBy | GameConnectionId | GameConnectionCreated_at | GameConnectionUpdated_at | GameConnectionName | GameConnectionSlug | GameConnectionShort_description | GameConnectionDescription | GameConnectionPrice | GameConnectionRelease_date | GameConnectionRating | GameConnectionCover | GameConnectionPublisher | GameConnectionCreated_by | GameConnectionUpdated_by | createGamePayload | updateGamePayload | deleteGamePayload | Home | updateHomePayload | deleteHomePayload | Platform | PlatformConnection | PlatformAggregator | PlatformGroupBy | PlatformConnectionId | PlatformConnectionCreated_at | PlatformConnectionUpdated_at | PlatformConnectionName | PlatformConnectionSlug | PlatformConnectionCreated_by | PlatformConnectionUpdated_by | createPlatformPayload | updatePlatformPayload | deletePlatformPayload | Publisher | PublisherConnection | PublisherAggregator | PublisherGroupBy | PublisherConnectionId | PublisherConnectionCreated_at | PublisherConnectionUpdated_at | PublisherConnectionName | PublisherConnectionSlug | PublisherConnectionCreated_by | PublisherConnectionUpdated_by | createPublisherPayload | updatePublisherPayload | deletePublisherPayload | Recommended | updateRecommendedPayload | deleteRecommendedPayload | Wishlist | WishlistConnection | WishlistAggregator | WishlistGroupBy | WishlistConnectionId | WishlistConnectionCreated_at | WishlistConnectionUpdated_at | WishlistConnectionUser | WishlistConnectionCreated_by | WishlistConnectionUpdated_by | createWishlistPayload | updateWishlistPayload | deleteWishlistPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UploadFileConnectionCreated_by | UploadFileConnectionUpdated_by | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnectionCreated_by | UsersPermissionsRoleConnectionUpdated_by | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionCreated_by | UsersPermissionsUserConnectionUpdated_by | createUserPayload | updateUserPayload | deleteUserPayload | ComponentPageButton | ComponentPageHighlight | ComponentPagePopularGames | ComponentPageRibbon | ComponentPageSection
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Banner | BannerConnection | BannerAggregator | BannerGroupBy | BannerConnectionId | BannerConnectionCreated_at | BannerConnectionUpdated_at | BannerConnectionImage | BannerConnectionTitle | BannerConnectionSubtitle | BannerConnectionButton | BannerConnectionRibbon | BannerConnectionCreated_by | BannerConnectionUpdated_by | createBannerPayload | updateBannerPayload | deleteBannerPayload | Category | CategoryConnection | CategoryAggregator | CategoryGroupBy | CategoryConnectionId | CategoryConnectionCreated_at | CategoryConnectionUpdated_at | CategoryConnectionName | CategoryConnectionSlug | CategoryConnectionCreated_by | CategoryConnectionUpdated_by | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | Developer | DeveloperConnection | DeveloperAggregator | DeveloperGroupBy | DeveloperConnectionId | DeveloperConnectionCreated_at | DeveloperConnectionUpdated_at | DeveloperConnectionName | DeveloperConnectionSlug | DeveloperConnectionCreated_by | DeveloperConnectionUpdated_by | createDeveloperPayload | updateDeveloperPayload | deleteDeveloperPayload | Game | GameConnection | GameAggregator | GameAggregatorSum | GameAggregatorAvg | GameAggregatorMin | GameAggregatorMax | GameGroupBy | GameConnectionId | GameConnectionCreated_at | GameConnectionUpdated_at | GameConnectionName | GameConnectionSlug | GameConnectionShort_description | GameConnectionDescription | GameConnectionPrice | GameConnectionRelease_date | GameConnectionRating | GameConnectionCover | GameConnectionPublisher | GameConnectionCreated_by | GameConnectionUpdated_by | createGamePayload | updateGamePayload | deleteGamePayload | Home | updateHomePayload | deleteHomePayload | Order | OrderConnection | OrderAggregator | OrderGroupBy | OrderConnectionId | OrderConnectionCreated_at | OrderConnectionUpdated_at | OrderConnectionUser | OrderConnectionTotal_in_cents | OrderConnectionPayment_intent_id | OrderConnectionCard_brand | OrderConnectionCard_last4 | OrderConnectionCreated_by | OrderConnectionUpdated_by | createOrderPayload | updateOrderPayload | deleteOrderPayload | Platform | PlatformConnection | PlatformAggregator | PlatformGroupBy | PlatformConnectionId | PlatformConnectionCreated_at | PlatformConnectionUpdated_at | PlatformConnectionName | PlatformConnectionSlug | PlatformConnectionCreated_by | PlatformConnectionUpdated_by | createPlatformPayload | updatePlatformPayload | deletePlatformPayload | Publisher | PublisherConnection | PublisherAggregator | PublisherGroupBy | PublisherConnectionId | PublisherConnectionCreated_at | PublisherConnectionUpdated_at | PublisherConnectionName | PublisherConnectionSlug | PublisherConnectionCreated_by | PublisherConnectionUpdated_by | createPublisherPayload | updatePublisherPayload | deletePublisherPayload | Recommended | updateRecommendedPayload | deleteRecommendedPayload | Wishlist | WishlistConnection | WishlistAggregator | WishlistGroupBy | WishlistConnectionId | WishlistConnectionCreated_at | WishlistConnectionUpdated_at | WishlistConnectionUser | WishlistConnectionCreated_by | WishlistConnectionUpdated_by | createWishlistPayload | updateWishlistPayload | deleteWishlistPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UploadFileConnectionCreated_by | UploadFileConnectionUpdated_by | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnectionCreated_by | UsersPermissionsRoleConnectionUpdated_by | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionCreated_by | UsersPermissionsUserConnectionUpdated_by | createUserPayload | updateUserPayload | deleteUserPayload | ComponentPageButton | ComponentPageHighlight | ComponentPagePopularGames | ComponentPageRibbon | ComponentPageSection
 
 """"""
 type UsersPermissionsMe {
@@ -1021,6 +1027,243 @@ type deleteHomePayload {
 }
 
 """"""
+type Order {
+  """"""
+  id: ID!
+  """"""
+  created_at: DateTime!
+  """"""
+  updated_at: DateTime!
+  """"""
+  user: UsersPermissionsUser
+  """"""
+  total_in_cents: Long!
+  """"""
+  payment_intent_id: String
+  """"""
+  card_brand: String
+  """"""
+  card_last4: String
+  """"""
+  created_by: AdminUser
+  """"""
+  updated_by: AdminUser
+  """"""
+  games(sort: String, limit: Int, start: Int, where: JSON): [Game!]!
+}
+
+""""""
+type UsersPermissionsUser {
+  """"""
+  id: ID!
+  """"""
+  created_at: DateTime!
+  """"""
+  updated_at: DateTime!
+  """"""
+  username: String!
+  """"""
+  email: String!
+  """"""
+  provider: String
+  """"""
+  confirmed: Boolean
+  """"""
+  blocked: Boolean
+  """"""
+  role: UsersPermissionsRole
+  """"""
+  created_by: AdminUser
+  """"""
+  updated_by: AdminUser
+}
+
+""""""
+type UsersPermissionsRole {
+  """"""
+  id: ID!
+  """"""
+  name: String!
+  """"""
+  description: String
+  """"""
+  type: String
+  """"""
+  created_by: AdminUser
+  """"""
+  updated_by: AdminUser
+  """"""
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission!]!
+  """"""
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser!]!
+}
+
+""""""
+type UsersPermissionsPermission {
+  """"""
+  id: ID!
+  """"""
+  type: String!
+  """"""
+  controller: String!
+  """"""
+  action: String!
+  """"""
+  enabled: Boolean!
+  """"""
+  policy: String
+  """"""
+  role: UsersPermissionsRole
+  """"""
+  created_by: AdminUser
+  """"""
+  updated_by: AdminUser
+}
+
+"""The `Long` scalar type represents 52-bit integers"""
+scalar Long
+
+""""""
+type OrderConnection {
+  """"""
+  values: [Order]
+  """"""
+  groupBy: OrderGroupBy
+  """"""
+  aggregate: OrderAggregator
+}
+
+""""""
+type OrderGroupBy {
+  """"""
+  id: [OrderConnectionId]
+  """"""
+  created_at: [OrderConnectionCreated_at]
+  """"""
+  updated_at: [OrderConnectionUpdated_at]
+  """"""
+  user: [OrderConnectionUser]
+  """"""
+  total_in_cents: [OrderConnectionTotal_in_cents]
+  """"""
+  payment_intent_id: [OrderConnectionPayment_intent_id]
+  """"""
+  card_brand: [OrderConnectionCard_brand]
+  """"""
+  card_last4: [OrderConnectionCard_last4]
+  """"""
+  created_by: [OrderConnectionCreated_by]
+  """"""
+  updated_by: [OrderConnectionUpdated_by]
+}
+
+""""""
+type OrderConnectionId {
+  """"""
+  key: ID
+  """"""
+  connection: OrderConnection
+}
+
+""""""
+type OrderConnectionCreated_at {
+  """"""
+  key: DateTime
+  """"""
+  connection: OrderConnection
+}
+
+""""""
+type OrderConnectionUpdated_at {
+  """"""
+  key: DateTime
+  """"""
+  connection: OrderConnection
+}
+
+""""""
+type OrderConnectionUser {
+  """"""
+  key: ID
+  """"""
+  connection: OrderConnection
+}
+
+""""""
+type OrderConnectionTotal_in_cents {
+  """"""
+  key: ID
+  """"""
+  connection: OrderConnection
+}
+
+""""""
+type OrderConnectionPayment_intent_id {
+  """"""
+  key: String
+  """"""
+  connection: OrderConnection
+}
+
+""""""
+type OrderConnectionCard_brand {
+  """"""
+  key: String
+  """"""
+  connection: OrderConnection
+}
+
+""""""
+type OrderConnectionCard_last4 {
+  """"""
+  key: String
+  """"""
+  connection: OrderConnection
+}
+
+""""""
+type OrderConnectionCreated_by {
+  """"""
+  key: ID
+  """"""
+  connection: OrderConnection
+}
+
+""""""
+type OrderConnectionUpdated_by {
+  """"""
+  key: ID
+  """"""
+  connection: OrderConnection
+}
+
+""""""
+type OrderAggregator {
+  """"""
+  count: Int
+  """"""
+  totalCount: Int
+}
+
+""""""
+type createOrderPayload {
+  """"""
+  order: Order
+}
+
+""""""
+type updateOrderPayload {
+  """"""
+  order: Order
+}
+
+""""""
+type deleteOrderPayload {
+  """"""
+  order: Order
+}
+
+""""""
 type PlatformConnection {
   """"""
   values: [Platform]
@@ -1284,74 +1527,6 @@ type Wishlist {
   updated_by: AdminUser
   """"""
   games(sort: String, limit: Int, start: Int, where: JSON): [Game!]!
-}
-
-""""""
-type UsersPermissionsUser {
-  """"""
-  id: ID!
-  """"""
-  created_at: DateTime!
-  """"""
-  updated_at: DateTime!
-  """"""
-  username: String!
-  """"""
-  email: String!
-  """"""
-  provider: String
-  """"""
-  confirmed: Boolean
-  """"""
-  blocked: Boolean
-  """"""
-  role: UsersPermissionsRole
-  """"""
-  created_by: AdminUser
-  """"""
-  updated_by: AdminUser
-}
-
-""""""
-type UsersPermissionsRole {
-  """"""
-  id: ID!
-  """"""
-  name: String!
-  """"""
-  description: String
-  """"""
-  type: String
-  """"""
-  created_by: AdminUser
-  """"""
-  updated_by: AdminUser
-  """"""
-  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission!]!
-  """"""
-  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser!]!
-}
-
-""""""
-type UsersPermissionsPermission {
-  """"""
-  id: ID!
-  """"""
-  type: String!
-  """"""
-  controller: String!
-  """"""
-  action: String!
-  """"""
-  enabled: Boolean!
-  """"""
-  policy: String
-  """"""
-  role: UsersPermissionsRole
-  """"""
-  created_by: AdminUser
-  """"""
-  updated_by: AdminUser
 }
 
 """"""
@@ -2033,6 +2208,12 @@ type Mutation {
   """"""
   deleteHome: deleteHomePayload
   """"""
+  createOrder(input: createOrderInput): createOrderPayload
+  """"""
+  updateOrder(input: updateOrderInput): updateOrderPayload
+  """"""
+  deleteOrder(input: deleteOrderInput): deleteOrderPayload
+  """"""
   createPlatform(input: createPlatformInput): createPlatformPayload
   """"""
   updatePlatform(input: updatePlatformInput): updatePlatformPayload
@@ -2432,6 +2613,66 @@ input editComponentPagePopularGameInput {
   highlight: editComponentPageHighlightInput
   """"""
   games: [ID]
+}
+
+""""""
+input createOrderInput {
+  """"""
+  data: OrderInput
+}
+
+""""""
+input OrderInput {
+  """"""
+  user: ID
+  """"""
+  games: [ID]
+  """"""
+  total_in_cents: Long!
+  """"""
+  payment_intent_id: String
+  """"""
+  card_brand: String
+  """"""
+  card_last4: String
+  """"""
+  created_by: ID
+  """"""
+  updated_by: ID
+}
+
+""""""
+input updateOrderInput {
+  """"""
+  where: InputID
+  """"""
+  data: editOrderInput
+}
+
+""""""
+input editOrderInput {
+  """"""
+  user: ID
+  """"""
+  games: [ID]
+  """"""
+  total_in_cents: Long
+  """"""
+  payment_intent_id: String
+  """"""
+  card_brand: String
+  """"""
+  card_last4: String
+  """"""
+  created_by: ID
+  """"""
+  updated_by: ID
+}
+
+""""""
+input deleteOrderInput {
+  """"""
+  where: InputID
 }
 
 """"""
@@ -2887,9 +3128,6 @@ input editFileInput {
 
 """A time string with format: HH:mm:ss.SSS"""
 scalar Time
-
-"""The `Long` scalar type represents 52-bit integers"""
-scalar Long
 
 """"""
 enum CacheControlScope {
