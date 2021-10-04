@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
@@ -75,7 +76,6 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
 
     if (freeGames) {
       saveOrder()
-
       push('/success')
       return
     }
@@ -94,7 +94,6 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
       setLoading(false)
 
       saveOrder(payload.paymentIntent)
-
       push('/success')
     }
   }
@@ -131,9 +130,11 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
           )}
         </S.Body>
         <S.Footer>
-          <Button as="a" fullWidth minimal>
-            Continue shopping
-          </Button>
+          <Link href="/" passHref>
+            <Button as="a" fullWidth minimal>
+              Continue shopping
+            </Button>
+          </Link>
           <Button
             fullWidth
             icon={loading ? <FormLoading /> : <ShoppingCart />}
