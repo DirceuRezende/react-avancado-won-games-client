@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import Button from 'components/Button'
 import Ribbon from 'components/Ribbon'
 import { RibbonColors, RibbonSizes } from 'components/Ribbon'
@@ -25,7 +27,9 @@ const Banner = ({
   ribbonSize = 'normal'
 }: BannerProps) => (
   <S.Wrapper>
-    <S.Image src={img} role="img" aria-label={title} />
+    <S.ImageWrapper>
+      <Image src={img} alt={title} layout="fill" objectFit="cover" />
+    </S.ImageWrapper>
     <S.Caption>
       <S.Title>{title}</S.Title>
       <S.Subtitle dangerouslySetInnerHTML={{ __html: subtitle }} />
