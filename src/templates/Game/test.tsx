@@ -1,13 +1,12 @@
 import { render, screen } from 'utils/test-utils'
 
-import Game, { GameTemplateProps } from '.'
-
 import galleryMock from 'components/Gallery/mock'
 import gameInfoMock from 'components/GameInfo/mock'
 import gameDetailsMock from 'components/GameDetails/mock'
 import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 
+import Game, { GameTemplateProps } from '.'
 import { GameDetailsProps } from 'components/GameDetails'
 
 const props: GameTemplateProps = {
@@ -100,15 +99,13 @@ describe('<Game />', () => {
   it('should render the cover image', () => {
     render(<Game {...props} />)
 
-    const cover = screen.getByRole('image', { name: /cover/i })
+    const cover = screen.getByRole('img', { name: /Borderlands 3/i })
+      .parentElement
 
-    expect(cover).toHaveStyle({
-      backgroundImage: 'url(bg-image.jpg)',
-      height: '39.5rem'
-    })
     expect(cover).toHaveStyleRule('height', '70rem', {
       media: '(min-width: 768px)'
     })
+
     expect(cover).toHaveStyleRule(
       'clip-path',
       'polygon(0 0,100% 0,100% 100%,0 85%)',

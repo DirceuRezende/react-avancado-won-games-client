@@ -10,8 +10,8 @@ describe('<Auth />', () => {
       </Auth>
     )
 
-    // verifica se tem 2 logos
-    expect(screen.getAllByRole('img', { name: /Won Games/i })).toHaveLength(2)
+    // verifiquem se tem 2 logos
+    expect(screen.getAllByRole('img', { name: 'Won Games' })).toHaveLength(2)
 
     // verifica se tem o heading principal do banner
     expect(
@@ -23,21 +23,16 @@ describe('<Auth />', () => {
     // verifica se tem o subtitle
     expect(
       screen.getByRole('heading', {
-        name: /WON is the best and most complete gaming platform/i
+        name: /won is the best and most complete gaming platform/i
       })
     ).toBeInTheDocument()
 
     // verifica se tem o title do content
     expect(
-      screen.getByRole('heading', { name: /Auth Title/i })
+      screen.getByRole('heading', { name: /auth title/i })
     ).toBeInTheDocument()
 
-    // verifica se tem o footer
-    expect(
-      screen.getByText(/Won Games 2020 © Todos os Direitos Reservados/i)
-    ).toBeInTheDocument()
-
-    // verifica se o children está sendo redenrizado
+    // verifica se o children tá sendo renderizado
     expect(screen.getByRole('textbox')).toBeInTheDocument()
   })
 })
