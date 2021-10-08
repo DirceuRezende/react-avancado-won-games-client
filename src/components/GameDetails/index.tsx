@@ -31,7 +31,7 @@ export const GameDetails = ({
     windows: <Windows title="Windows" size={18} />
   }
   return (
-    <S.Wrapper>
+    <S.Wrapper data-cy="game-details">
       <MediaMatch greaterThan="small">
         <Heading lineLeft lineColor="secondary">
           Game Details
