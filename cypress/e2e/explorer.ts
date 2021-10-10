@@ -96,7 +96,6 @@ describe('Explore Page', () => {
   });
 
   it('should return empty when no games match', () => {
-    // clear url
     cy.visit('/games')
 
 
