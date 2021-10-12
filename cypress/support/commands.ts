@@ -44,15 +44,15 @@ Cypress.Commands.add('shouldRenderBanner', () => {
 
     cy.wait(500)
 
-    cy.findByRole('heading', { name: /Divinity: Original Sin 2 - Definitive Edition/i })
+    cy.findByRole('heading', { name: /Horizon zero dawn/i })
     cy.findByRole('link', { name: /buy now/i })
 
     cy.get('.slick-dots > :nth-child(3) > button').click()
 
     cy.wait(500)
 
-    cy.findByRole('heading', { name: /Horizon Zero Dawn - Complete Edition/i })
-    cy.findByRole('link', { name: /buy now/i })
+    cy.findByRole('heading', { name: /Huge promotion!/i })
+    cy.findByRole('link', { name: /Browse games/i })
   })
 })
 
