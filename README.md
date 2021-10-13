@@ -33,7 +33,7 @@ Abra o seu navegador no [http://localhost:3000](http://localhost:3000) para ver 
 
 - `dev`: executa o projeto no `localhost:3000`
 - `build`: cria a versão de build de produção
-- `start`: starts a simple server with the build production code
+- `start`: inicia um servidor com o código de produção criado pelo comando build
 - `lint`: executa o linter em todos os componentes e páginas
 - `test`: executa o jest para testar todos os componentes e páginas
 - `test:watch`: executa o jest com --watch
